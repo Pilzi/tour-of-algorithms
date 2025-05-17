@@ -16,7 +16,7 @@ _start:
     mov dl, [list + ecx] ; check if the value at the start index is the end of the list (-1)
     cmp dl, -1 ; jump to interrupt if we are done
     je _interrupt
-    mov edi, [startIndex] ; edi is the j counter for the second loop
+    mov edi, ecx ; edi is the j counter for the second loop
 
 ; iterate through the list and store the smallest number found in minIndex
 .findNextSmallestNumber:
