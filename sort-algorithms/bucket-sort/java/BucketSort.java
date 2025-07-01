@@ -28,13 +28,13 @@ public class BucketSort {
     }
 
     /**
-     * I use this because I want stick an array
-     * alternative: System.arraycopy(buckets[bucketIndex], 0, newRow, 0, buckets[bucketIndex].length);
+     * I don't use the array copy method because I want to prevent using predefined functions
      */
 
     public static float[] growBucketByOne(float[][] buckets, int bucketIndex) {
         int extendedLength = buckets[bucketIndex].length + 1;
         float[] newRow =  new float[extendedLength];
+     // alternative: System.arraycopy(buckets[bucketIndex], 0, newRow, 0, buckets[bucketIndex].length);
         for (int i = 0; i < buckets[bucketIndex].length; i++) {
             newRow[i] = buckets[bucketIndex][i];
         }
