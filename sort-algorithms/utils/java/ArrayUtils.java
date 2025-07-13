@@ -2,9 +2,6 @@ import java.lang.reflect.Array;
 
 public class ArrayUtils {
 
-    public static void main(String[] args) {
-    }
-
     /**
      * Converts the numeric input value to a specific type by creating a new array <br/>
      *
@@ -34,5 +31,4 @@ public class ArrayUtils {
         array[indexA] = array[indexB];
         array[indexB] = temp;
     }
-
 }
