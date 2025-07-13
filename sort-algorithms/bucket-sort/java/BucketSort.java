@@ -30,7 +30,6 @@ public class BucketSort {
     /**
      * I don't use the array copy method because I want to prevent using predefined functions
      */
-
     public static float[] growBucketByOne(float[][] buckets, int bucketIndex) {
         int extendedLength = buckets[bucketIndex].length + 1;
         float[] newRow =  new float[extendedLength];
