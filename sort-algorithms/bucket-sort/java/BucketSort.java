@@ -16,9 +16,9 @@ public class BucketSort {
 
         float[] result = new float[arr.length];
         int resultIndex = 0;
-
         for (float[] floats : buckets) {
-            float[] sortedBucket = InsertionSort.sort(floats); // WIP
+            // It's not possible to pass primitive arrays into generic functions
+            float[] sortedBucket = BoxingUtils.unbox(InsertionSort.sort(BoxingUtils.box(floats)));
             for (float bucket : sortedBucket) {
                 result[resultIndex] = bucket;
                 resultIndex++;
@@ -40,5 +40,4 @@ public class BucketSort {
         }
         return newRow;
     }
-
 }

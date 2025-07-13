@@ -1,12 +1,16 @@
 /**
- * Utility methods to box primitive arrays into their wrapper type arrays. <br/>
+ * Utility methods to box and unbox primitive arrays and their wrapper types.
  *
- * Why no generics? <br/>
- * - Java generics do not support primitives (e.g., int, float). <br/>
- * - Reflection or Streams are much slower. <br/>
- * - Overloaded methods with direct array access are the most performant approach. <br/>
+ * Why no generics?
+ * - Java generics do not support primitives (e.g., int, float).
+ * - Reflection or Streams are much slower.
+ * - Overloaded methods with direct array access are the most performant approach.
  */
 public class BoxingUtils {
+
+    // ---------------------
+    // BOXING METHODS
+    // ---------------------
 
     /** Box int[] -> Integer[] */
     public static Integer[] box(int[] array) {
@@ -37,9 +41,8 @@ public class BoxingUtils {
 
     /** Box long[] -> Long[] */
     public static Long[] box(long[] array) {
-        final int len = array.length;
-        final Long[] boxed = new Long[len];
-        for (int i = 0; i < len; i++) {
+        final Long[] boxed = new Long[array.length];
+        for (int i = 0; i < array.length; i++) {
             boxed[i] = array[i];
         }
         return boxed;
@@ -61,5 +64,63 @@ public class BoxingUtils {
             boxed[i] = array[i];
         }
         return boxed;
+    }
+
+    // ---------------------
+    // UNBOXING METHODS
+    // ---------------------
+
+    /** Unbox Integer[] -> int[] */
+    public static int[] unbox(Integer[] array) {
+        final int[] unboxed = new int[array.length];
+        for (int i = 0; i < array.length; i++) {
+            unboxed[i] = array[i];
+        }
+        return unboxed;
+    }
+
+    /** Unbox Float[] -> float[] */
+    public static float[] unbox(Float[] array) {
+        final float[] unboxed = new float[array.length];
+        for (int i = 0; i < array.length; i++) {
+            unboxed[i] = array[i];
+        }
+        return unboxed;
+    }
+
+    /** Unbox Double[] -> double[] */
+    public static double[] unbox(Double[] array) {
+        final double[] unboxed = new double[array.length];
+        for (int i = 0; i < array.length; i++) {
+            unboxed[i] = array[i];
+        }
+        return unboxed;
+    }
+
+    /** Unbox Long[] -> long[] */
+    public static long[] unbox(Long[] array) {
+        final long[] unboxed = new long[array.length];
+        for (int i = 0; i < array.length; i++) {
+            unboxed[i] = array[i];
+        }
+        return unboxed;
+    }
+
+    /** Unbox Short[] -> short[] */
+    public static short[] unbox(Short[] array) {
+        final short[] unboxed = new short[array.length];
+        for (int i = 0; i < array.length; i++) {
+            unboxed[i] = array[i];
+        }
+        return unboxed;
+    }
+
+    /** Unbox Byte[] -> byte[] */
+    public static byte[] unbox(Byte[] array) {
+        final byte[] unboxed = new byte[array.length];
+        for (int i = 0; i < array.length; i++) {
+            unboxed[i] = array[i];
+        }
+        return unboxed;
     }
 }
