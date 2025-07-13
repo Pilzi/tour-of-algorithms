@@ -5,14 +5,14 @@ public class InsertionSort {
      *
      * @param array the array to sort
      */
-    public static int[] sort(int[] array) {
+    public static <T extends Number & Comparable<T>> T[] sort(T[] array) {
 
         for (int i = 1; i < array.length; i++) {
-            int unsortedValue = array[i];
+            T unsortedValue = array[i];
 
             // Find the correct position for unsortedValue in the sorted part
             int insertIndex = 0;
-            while (insertIndex < i && array[insertIndex] < unsortedValue) {
+            while (insertIndex < i && array[insertIndex].compareTo(unsortedValue) < 0 ) {
                 insertIndex++;
             }
 
@@ -24,8 +24,6 @@ public class InsertionSort {
             // Finally, insert the unsorted value at the correct place
             array[insertIndex] = unsortedValue;
         }
-
         return array;
     }
-
 }
