@@ -16,9 +16,9 @@ public class BucketSort {
 
         float[] result = new float[arr.length];
         int resultIndex = 0;
-
         for (float[] floats : buckets) {
-            float[] sortedBucket = InsertionSort.sort(floats); // WIP
+            // It's not possible to pass primitive arrays into generic functions
+            float[] sortedBucket = BoxingUtils.unbox(InsertionSort.sort(BoxingUtils.box(floats)));
             for (float bucket : sortedBucket) {
                 result[resultIndex] = bucket;
                 resultIndex++;
@@ -30,7 +30,6 @@ public class BucketSort {
     /**
      * I don't use the array copy method because I want to prevent using predefined functions
      */
-
     public static float[] growBucketByOne(float[][] buckets, int bucketIndex) {
         int extendedLength = buckets[bucketIndex].length + 1;
         float[] newRow =  new float[extendedLength];
@@ -40,5 +39,4 @@ public class BucketSort {
         }
         return newRow;
     }
-
 }
