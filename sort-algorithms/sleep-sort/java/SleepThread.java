@@ -1,12 +1,12 @@
 import java.util.function.Consumer;
 
-public class SleepThread extends Thread{
+public class SleepThread<T extends Number> extends Thread{
 
     volatile long id;
-    volatile Integer sleepTimeSec;
-    volatile Consumer<Integer> consumer;
+    volatile T sleepTimeSec;
+    volatile Consumer<T> consumer;
 
-    SleepThread(long id, Integer sleepTimeSec, Consumer<Integer> consumer) {
+    SleepThread(long id, T sleepTimeSec, Consumer<T> consumer) {
         this.id = id;
         this.sleepTimeSec = sleepTimeSec;
         this.consumer = consumer;
@@ -14,8 +14,9 @@ public class SleepThread extends Thread{
 
     @Override
     public void run() {
+        Double exactTimeToSleep = NumberUtils.convertNumber(Double.class,this.sleepTimeSec) * 1000;
         try {
-            Thread.sleep(this.sleepTimeSec * 1000L);
+            Thread.sleep(NumberUtils.convertNumber( Long.class, exactTimeToSleep), 0);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
