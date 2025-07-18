@@ -30,4 +30,3 @@ public class NumberUtils {
         throw new ClassCastException("Cannot cast " + number.getClass().getName() + " to " + returnType);
     }
 }
-
