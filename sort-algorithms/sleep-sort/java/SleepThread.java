@@ -1,27 +1,26 @@
-import java.util.concurrent.CountDownLatch;
-
 class SleepThread<T extends Number> extends Thread {
     private final SleepSortResultArray<T> queue;
     private final T sleepTimeSec;
-    private final long sleepTimeMS;
-    private final CountDownLatch startSignal;
+    private final long sleepTimeNS;
+    private final ThreadSynchronizer synchronizer;
 
 
-    public SleepThread(SleepSortResultArray<T> queue, T sleepTimeSec, CountDownLatch startSignal) {
-        // TODO clarify and simplifies this calculations made to maximize performance inside the run method
-        Double exactTimeToSleep = NumberUtils.convertNumber(Double.class, sleepTimeSec) * 1000;
-        this.sleepTimeMS = NumberUtils.convertNumber( Long.class, exactTimeToSleep);
+    public SleepThread(SleepSortResultArray<T> queue, T sleepTimeSec, ThreadSynchronizer synchronizer) {
+        // Convert the input type into double, because its most precised value we support and calculate the nanoseconds
+        this.sleepTimeNS = (long) (NumberUtils.convertNumber(Double.class, sleepTimeSec) * 1e+9);
         this.queue = queue;
         this.sleepTimeSec = sleepTimeSec;
-        this.startSignal = startSignal;
+        this.synchronizer = synchronizer;
+
     }
 
     @Override
     public void run() {
         try {
-            startSignal.await();
+            synchronizer.join();
 
-            final long targetTime = System.nanoTime() + this.sleepTimeMS * 1_000_000L;
+            // Calculate exact time to sleep
+            final long targetTime = System.nanoTime() + this.sleepTimeNS;
 
             final long spinThreshold = 5_000_000L; // 5ms
 

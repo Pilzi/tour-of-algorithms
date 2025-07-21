@@ -1,5 +1,3 @@
-import java.util.concurrent.CountDownLatch;
-
 public class SleepSort {
 
     /**
@@ -18,11 +16,14 @@ public class SleepSort {
         SleepThread<T>[] producer = ArrayUtils.createArray(SleepThread.class, arr.length);
         // When a thread wakes up, it tells the consumer, to add the thread value to the sleepSortResultArray
         SleepSortResultArray<T> queue = new SleepSortResultArray<>(ArrayUtils.createArray(arr[0].getClass(), arr.length));
-        // TODO Check if its possible to prevent using CountDownLetch without losing performance
-        CountDownLatch startSignal = new CountDownLatch(1);
+        // The synchronizer finishes when it gets unblocked.
+        // Other threads can wait for him using thread.join to start them all at the same time
+        ThreadSynchronizer synchronizer = new ThreadSynchronizer();
+        synchronizer.start();
+
         for (int i = 0; i < arr.length; i++) {
             // Using double because it's the most precised value I can support
-            SleepThread<T> thread = new SleepThread<T>(queue, arr[i], startSignal);
+            SleepThread<T> thread = new SleepThread<>(queue, arr[i], synchronizer);
             producer[i] = thread;
         }
 
@@ -30,7 +31,8 @@ public class SleepSort {
         for (SleepThread<T> thread : producer) {
             thread.start();
         }
-        startSignal.countDown();
+        // Start each thread at the same time
+        synchronizer.unblock();
         // Wait until the last thread finished
         for (SleepThread<T> thread : producer) {
             try {
