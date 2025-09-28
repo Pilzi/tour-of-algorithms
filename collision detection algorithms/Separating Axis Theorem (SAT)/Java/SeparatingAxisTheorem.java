@@ -35,9 +35,9 @@ public class SeparatingAxisTheorem {
         return true;
     }
 
-    /*
-        Check if the minimums/maximus found in the project function overlap
-    */
+    /**
+     * Check if the minimums/maximus found in the project function overlap
+     */
     private boolean overlapping(Projection p1, Projection p2) {
         return !(p1.max() < p2.min() || p2.max() < p1.min());
     }
