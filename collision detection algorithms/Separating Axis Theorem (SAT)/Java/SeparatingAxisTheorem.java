@@ -35,6 +35,9 @@ public class SeparatingAxisTheorem {
         return true;
     }
 
+    /*
+        Check if the minimums/maximus found in the project function overlap
+    */
     private boolean overlapping(Projection p1, Projection p2) {
         return !(p1.max() < p2.min() || p2.max() < p1.min());
     }
@@ -47,6 +50,7 @@ public class SeparatingAxisTheorem {
             CoordinationBean firstVertex = shape[i];
             CoordinationBean secondVertex = shape[i + 1 < shape.length ? i + 1 : 0];
             CoordinationBean subtractedEdge = new CoordinationBean(firstVertex.x() - secondVertex.x(), firstVertex.y() - secondVertex.y());
+            // Normalize the axis to get accurate projections
             double length = Math.sqrt(subtractedEdge.x() * subtractedEdge.x() + subtractedEdge.y() * subtractedEdge.y());
             CoordinationBean normal = new CoordinationBean(
                     -subtractedEdge.y() / length,
