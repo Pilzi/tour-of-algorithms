@@ -19,7 +19,7 @@ public class SeparatingAxisTheorem {
             return false;
         }
 
-        return !isVectorOverlapping(secondConvexShape, firstConvexShape, secondShapePerpendicularVectors);
+        return isVectorOverlapping(secondConvexShape, firstConvexShape, secondShapePerpendicularVectors);
     }
 
     private boolean isVectorOverlapping(CoordinationBean[] firstConvexShape, CoordinationBean[] secondConvexShape, CoordinationBean[] firstShapePerpendicularVectors) {
